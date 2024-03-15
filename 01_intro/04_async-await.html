@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+      promise를 더 쉽게 사용할 수 있게 asnyc/await가 ES2017(ES8)에서 추가되었다. 
+    */
+    function increase(number) {
+            const promise = new Promise(
+                (reslove, reject) => {    // resolve :  풀다    reject : 거부하다
+                    setTimeout(
+                        () => {
+                            const result = number + 10;
+
+                            if(result > 50) {
+                                const e = new Error('숫자 너무 크다');
+
+                                return reject(e);
+                            }
+
+                            reslove(result);
+                        }, 1000
+                    )
+                }
+            );
+            return promise;
+        }
+        /*
+        1. await가 달린 함수의 결과인 promise에 담긴 결과를 반환한다.
+        2. await가 달린 비동기 처리들은 동기식으로 동작하게 한다.
+        */
+        async function run() {
+            try {
+               let result = await increase(0);
+               console.log(result);
+
+               result = await increase(result);
+               console.log(result);
+
+               result = await increase(result);
+               console.log(result);
+
+               result = await increase(result);
+               console.log(result);
+
+               result = await increase(result);
+               console.log(result);
+
+               result = await increase(result);
+               console.log(result);
+
+               result = await increase(result);
+               console.log(result);
+            } catch(e) {
+                console.log(e, '에러가 발생했네');
+            }
+            
+        }
+        run();
+
+
+
+    </script>
+    
+</body>
+</html>
